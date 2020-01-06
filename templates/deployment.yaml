@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.swaggerui.jsonPath }}
           volumeMounts:
@@ -34,8 +34,15 @@ spec:
           env:
           - name: SWAGGER_JSON
             value: /api-doc/openapi.json
+          - name: BASE_URL
+            value: {{ .Values.baseUrl }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbe.httpGet.path }}
+              port: {{ .Values.livenessProbe.httpGet.port }} 
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: {{ .Values.livenessProbe.httpGet.path }}
               port: {{ .Values.livenessProbe.httpGet.port }}
           ports:
           - name: http
