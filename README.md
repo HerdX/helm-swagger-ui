@@ -1,7 +1,4 @@
 # Helm Chart for swagger-ui
-
-[![CircleCI](https://circleci.com/gh/cetic/helm-swagger-ui.svg?style=svg)](https://circleci.com/gh/cetic/helm-swagger-ui/tree/master) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![version](https://img.shields.io/github/tag/cetic/helm-swagger-ui.svg?label=release)
-
 ## Introduction
 
 This [Helm](https://github.com/kubernetes/helm) chart installs [swagger-ui](https://github.com/swagger-ui-api/swagger-ui) in a Kubernetes cluster.
@@ -14,12 +11,8 @@ This [Helm](https://github.com/kubernetes/helm) chart installs [swagger-ui](http
 
 ## Installation
 
-### Add Helm repository
-
-```bash
-helm repo add cetic https://cetic.github.io/helm-charts
-helm repo update
-```
+### Original Authors
+This chart is derived from `https://cetic.github.io/helm-charts/swagger-ui`
 
 ### Configure the chart
 
@@ -37,6 +30,12 @@ The following items can be set via `--set` flag during installation or configure
 Install the swagger-ui helm chart with a release name `my-release`:
 
 ```bash
+docker build -t your_tag .
+# Change yaml to point to your image
+# If necessary add a imagePullSecret
+## Example of Image Pull Secret in values.yaml
+# imagePullSecrets:
+#   - name: quay
 helm install --name my-release cetic/swaggerui
 ```
 
@@ -58,11 +57,11 @@ The following table lists the configurable parameters of the swagger-ui chart an
 | `image.repository`                                                          | swagger-ui Image name                                                                                              | `swaggerapi/swagger-ui`         |
 | `image.tag`                                                                 | swagger-ui Image tag                                                                                               | `v3.23.10`                      |
 | `image.pullPolicy`                                                          | swagger-ui Image pull policy                                                                                       | `IfNotPresent`                  |
-| **swagger-ui**                                                              |
-| `swagger-ui.jsonPath`                                                       | location of the configuration json file file                                                                       | `""`                            |
-| `swagger-ui.jsonUrl`                                                        | location of the configuration json file file                                                                       | `http://petstore.swagger.io/v2/swagger.json` |
-| `swagger-ui.server.url`                                                     | Url of a custom server                                                                                             | `"http://www.google.be"`        |
-| `swagger-ui.server.description`                                             | descripton of a custom server                                                                                      | `"helm-online"`                 |
+| **swaggerui**                                                              |
+| `swaggerui.jsonPath`                                                       | location of the configuration json file file                                                                       | `""`                            |
+| `swaggerui.jsonUrl`                                                        | location of the configuration json file file                                                                       | `http://petstore.swagger.io/v2/swagger.json` |
+| `swaggerui.server.url`                                                     | Url of a custom server                                                                                             | `"http://www.google.be"`        |
+| `swaggerui.server.description`                                             | descripton of a custom server                                                                                      | `"helm-online"`                 |
 | **Service**                                                                 |
 | `service.type`                                                              | Type of service for swagger-ui frontend                                                                            | `NodePort`                      |
 | `service.port`                                                              | Port to expose service                                                                                             | `8080`                          |
@@ -89,7 +88,7 @@ The following table lists the configurable parameters of the swagger-ui chart an
 
 ## Contributing
 
-Feel free to contribute by making a [pull request](https://github.com/cetic/helm-swagger-ui/pull/new/master).
+Feel free to contribute by making a [pull request](https://github.com/cetic/swagger-ui/pull/new/master).
 
 Please read the official [Contribution Guide](https://github.com/helm/charts/blob/master/CONTRIBUTING.md) from Helm for more information on how you can contribute to this Chart.
 
